@@ -8,7 +8,7 @@ services:
       clickhouse-network:
         ipv4_address: 172.23.0.10
   clickhouse01:
-    image: yandex/clickhouse-server:20.4
+    image: yandex/clickhouse-server:20.10
     container_name: clickhouse01
     hostname: clickhouse01
     networks:
@@ -16,40 +16,49 @@ services:
         ipv4_address: 172.23.0.11
     ports:
       - "127.0.0.1:8123:8123"
-      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9000"
     volumes:
       - ${PWD}/clickhouse01:/etc/clickhouse-server
     depends_on:
       - zookeeper
   clickhouse02:
-    image: yandex/clickhouse-server:20.4
+    image: yandex/clickhouse-server:20.10
     container_name: clickhouse02
     hostname: clickhouse02
     networks:
       clickhouse-network:
         ipv4_address: 172.23.0.12
+    ports:
+      - "127.0.0.1:8124:8123"
+      - "127.0.0.1:9002:9000"
     volumes:
       - ${PWD}/clickhouse02:/etc/clickhouse-server
     depends_on:
       - zookeeper
   clickhouse03:
-    image: yandex/clickhouse-server:20.4
+    image: yandex/clickhouse-server:20.10
     container_name: clickhouse03
     hostname: clickhouse03
     networks:
       clickhouse-network:
         ipv4_address: 172.23.0.13
+    ports:
+      - "127.0.0.1:8125:8123"
+      - "127.0.0.1:9003:9000"
     volumes:
       - ${PWD}/clickhouse03:/etc/clickhouse-server
     depends_on:
       - zookeeper
   clickhouse04:
-    image: yandex/clickhouse-server:20.4
+    image: yandex/clickhouse-server:20.10
     container_name: clickhouse04
     hostname: clickhouse04
     networks:
       clickhouse-network:
         ipv4_address: 172.23.0.14
+    ports:
+      - "127.0.0.1:8126:8123"
+      - "127.0.0.1:9004:9000"
     volumes:
       - ${PWD}/clickhouse04:/etc/clickhouse-server
     depends_on:
